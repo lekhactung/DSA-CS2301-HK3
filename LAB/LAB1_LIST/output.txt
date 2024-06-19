@@ -1,0 +1,9 @@
+Nhap chuong trinh : Vui long nhap lai!  
+Nhap chuong trinh : 1. Nhap danh sach 
+2. Xuat danh sach 
+3. Tim mot phan tu trong danh sach 
+4. Them phan tu vao cuoi danh sach 
+5. Xoa phan tu cuoi danh sach 
+6. Xoa phan tu tai vi tri i 
+7. Them phan tu tai vi tri i 
+8. Tim phan tu trong danh sach, neu tim thay -> xoa phan tu 
