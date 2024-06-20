@@ -1,45 +1,47 @@
-#include <bits/stdc++.h>
-using  namespace std;
+#include <iostream>
+using namespace std;
 
-struct node {
+struct node{
     int info;
-    node *prev,*next;
+    node *prev;
+    node *next;
 };
 
-node* createNode(int x){
-    node *p = new node;
-    p->info = x;
-    p->next = p->prev = NULL;
-    return p;
+void init(node *&head){
+    head->prev = NULL;
+    head->next = NULL;
 }
 
 void output(node *head){
     while(head!=NULL){
-        cout << head->info << " ";
+        cout << head->info <<" ";
         head = head->next;
     }
 }
 
-void insertFirst(node *&head,int x){
-    node *p = createNode(x);
-    
-    p->next = head;
+node* createNode(int x){
+    node *p = new node;
+    p->info = x;
+    p->next = NULL;
+    p->prev = NULL;
+    return p;
+}
 
+void themdau(node *&head, int x){
+    node *p = createNode(x);
+    p->next = head;
     if(head!=NULL){
         head->prev = p;
     }
-
     head = p;
 }
 
 int main(){
-
     node *head;
-    insertFirst(head,10);
-    insertFirst(head,20);
-    insertFirst(head,30);
-
+    // init(head);
+    for(int i=1;i<=10;i++){
+        themdau(head,i);
+    }
     output(head);
-
     return 0;
 }
