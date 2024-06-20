@@ -84,9 +84,9 @@ void output(Node *head){
 //     return p;
 // }
 
-bool search(Node *head, int x){
+bool search( Node *head, int x){
     Node *p = head;
-    while(p!=NULL){
+    while(p->link!=NULL){
         if(p->info == x){
             return true;
         }
@@ -103,7 +103,6 @@ int count(Node *head){
     }
     return cnt;
 }
-
 
 void deleteNode(Node *&head,int x){
     if(head==NULL){
@@ -125,19 +124,18 @@ void deleteNode(Node *&head,int x){
         return;
     }
     prev->link = p->link;
-    delete prev;
+    delete prev;    
     return;
 }
-
 
 void menu(){
     cout << "1. Xuat cac phan tu trong danh sach \n"
         <<"2. Tim phan tu trong danh sach \n"
-        <<"3. Them phan tu vao dau danh sach \n"
-        <<"4. Xoa phan tu dau danh sach \n"
-        << "5. Them phan tu vao cuoi danh sach \n"
-        <<"6. Xoa phan tu cuoi danh sach \n"
-        <<"7. Tim phan tu trong danh sach va xoa phan tu do neu tim duoc \n";
+        <<"3.Them phan tu vao dau danh sach \n"
+        <<"4.Xoa phan tu dau danh sach \n"
+        << "5.Them phan tu vao cuoi danh sach \n"
+        <<"6.Xoa phan tu cuoi danh sach \n"
+        <<"7.Tim phan tu trong danh sach va xoa phan tu do neu tim duoc \n";
 }
 
 int main(){
@@ -145,66 +143,29 @@ int main(){
     Node *head;
     init(head);
     int choice,x;
-    do{
-        do{
-            system("cls");
-            menu();
-            cout << "Nhap chuong trinh : ";
-            cin >> choice;
-            if(choice !=0 && choice !=1 &&choice !=2 &&choice !=3 &&choice !=4 &&choice !=5 &&choice !=6 &&choice !=7) {
-                cout <<"Vui long nhap lai!" << endl;
-            }
-        } while( choice!=0 && choice !=1 &&choice !=2 &&choice !=3 &&choice !=4 &&choice !=5 &&choice !=6 &&choice !=7);
+    insertFirst(head,10);
+    insertFirst(head,20);
+    insertFirst(head,30);
+    insertFirst(head,40);
+    insertFirst(head,50);
+    insertLast(head,5);
+    insertLast(head,99);
+    insertLast(head,87);
+    insertLast(head,100);
+    insertLast(head,123);
+    output(head);
+    // cout << count(head);
+    deleteNode(head,50);
 
+    cout << endl;
+    output(head);
+    deleteNode(head,10);
 
-        switch (choice)
-        {
-        case 1:
-            output(head);
-            break;
-        case 2:
-            cout << "Nhap phan tu can tim: ";
-            cin >> x;
-            if(search(head,x)){
-                cout << "Phan tu co trong danh sach!" << endl;
-            }else {
-                cout << "Phan tu khong co trong danh sach! " << endl;
-            }
-            break;
-        case 3:
-            cout << "Nhap phan tu can them vao dau danh sach: ";
-            cin >> x;
-            insertFirst(head,x);
-            break;
-        case 4:
-            delFirst(head);
-            cout <<"Da xoa!" << endl;
-            break;
-        case 5:
-            cout << "Nhap gia tri can them vao cuoi danh sach: ";
-            cin >> x;
-            insertLast(head,x);
-            break;
-        case 6:
-            delLast(head);
-            cout << "Da xoa!" << endl;
-            break;
-        case 7:
-            cout << "Nhap phan tu can tim va xoa :";
-            cin >> x;
-            if(search(head,x)){
-                deleteNode(head,x);
-                cout << "Da xoa!" << endl;
-            } else {
-                cout << "Phan tu khong co trong danh sach!";
-            }
-            break;
-        
-        default:
-            break;
-        }
-        system("pause");
-    } while(choice!=0);
-    
+    cout << endl;
+    output(head);
+    deleteNode(head,123);
+
+    cout << endl;
+    output(head);
     return 0;
 }
