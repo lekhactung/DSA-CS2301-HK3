@@ -5,10 +5,6 @@ using namespace std;
 #define MAX 100
 
 
-struct NTN {
-	int ngay, thang, nam;
-};
-
 struct SinhVien {
 	int MSSV;
 	string hoten;

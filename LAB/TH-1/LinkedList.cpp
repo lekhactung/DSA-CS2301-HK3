@@ -46,7 +46,6 @@ void xuat1sv(const SinhVien sv) {
 
 }
 
-
 void insertFirst(node *&head, SinhVien sv) {
 	node *p = createNode(sv);
 	if (head == NULL) {
@@ -69,6 +68,32 @@ void insertLast(node *&head, SinhVien sv) {
 			plast = plast->next;
 		}
 		plast->next = p;
+	}
+}
+
+
+void docfiledssv(node *&head,string tenFile) {
+	ifstream ifs;
+	ifs.open(tenFile);
+	if (ifs.is_open()) {
+		SinhVien sv;
+		int n, i=0;
+		ifs >> n;
+		ifs.ignore();
+		while(i<n){
+			ifs >> sv.MSSV; ifs.ignore();
+			getline(ifs,sv.hoten,'#');
+			ifs.get(sv.ngaysinh,11);ifs.ignore();
+			getline(ifs,sv.quequan,'#');
+			ifs >> sv.diemTB; ifs.ignore();
+			insertLast(head,sv);
+			i++;
+		}
+
+		ifs.close();
+	}
+	else {
+		cout << "Khong mo duoc file!";
 	}
 }
 
@@ -97,16 +122,17 @@ int main() {
 	node *head;
 	SinhVien sv;
 	init(head);
-	int chon = 1;
-	while (chon != 0) {
-		nhap1sv(sv);
-		insertLast(head, sv);
-		cout << "Tiep tuc : 1 /// Dung lai : 0 \n ::";
-		cin >> chon;
-	}
-	if (search(head, 5)) {
-		cout << "CO" << endl;
-	}
+	// int chon = 1;
+	// while (chon != 0) {
+	// 	nhap1sv(sv);
+	// 	insertLast(head, sv);
+	// 	cout << "Tiep tuc : 1 /// Dung lai : 0 \n ::";
+	// 	cin >> chon;
+	// }
+	// if (search(head, 5)) {
+	// 	cout << "CO" << endl;
+	// }
+	docfiledssv(head,"SinhVien.txt");
 	output(head);
 	return 0;
 }
