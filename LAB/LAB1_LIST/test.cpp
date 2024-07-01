@@ -1,58 +1,59 @@
 #include <iostream>
-
 using namespace std;
-void input(int a[],int &n){
-        for(int i=0;i<n;i++){
-            cin >> a[i];
-        }
+
+struct node {
+    int info;
+    node *next;
+};
+
+struct circlelinkedlist{
+    node *head;
+    node *tail;
+};
+
+void init(circlelinkedlist &cl){
+    cl.head = NULL;
+    cl.tail = NULL;
 }
 
-void output(int a[],int n){
-    for(int i=0;i<n;i++){
-        cout << a[i] << " ";
+node *createNode (int x){
+    node *p = new node;
+    p->info = x;
+    p->next = NULL;
+    return p;
+}
+
+void addFirst (circlelinkedlist &cl, int x){
+    node *p = createNode(x);
+    if(cl.head==NULL){
+        cl.head = cl.tail = p;
+        cl.tail->next = cl.head;
+    }
+    else {
+        p->next = cl.head;
+        cl.head = p;
+        cl.tail->next = cl.head;    
     }
 }
 
-void swap(int &a,int &b){
-    int tmp = a;
-    a = b;
-    b = tmp;
-}
-void sort(int a[],int n){
-    for(int i=0;i<n;i++){
-        for(int j=0;j<i;j++){
-            if(a[i]<=a[j]){
-                swap(a[i],a[j]);
-            }
-        }
-    }
-}
 
-int *gopmang(int a[],int b[],int n,int m){
-    int *c = new int [n+m];
-    int index =0; 
-    for(int i=0;i<n;i++){
-        c[index++] = a[i];
+void output(circlelinkedlist cl){
+    if(cl.head!=NULL){
+        node *p = cl.head;
+        do{
+            cout << p->info << " ";
+            p = p->next;
+        } while(p!=cl.head);
     }
-    for(int i=0;i<m;i++){
-        c[index++] = b[i];
-    }
-    sort(c,n+m);
-    return c;
 }
-
 int main(){
-    freopen("input.txt","r",stdin);
-    freopen("output.txt","w",stdout);
-    int n =5 , m =5;
-    int a[n],b[m];
-    int *c = new int [n+m];
-    input(a,n);
-    input(b,m);
-    c = gopmang(a,b,n,m);
-    output(a,n);
-    output(b,m);
-    cout << endl;
-    output(c,n+m);
-    return 0;
+    circlelinkedlist cl;
+    init(cl);
+    addFirst(cl,10);
+    addFirst(cl,20);
+    addFirst(cl,30);
+    addFirst(cl,40);
+    addFirst(cl,50);
+    output(cl);
+    return 1;
 }

@@ -15,6 +15,7 @@ void init(circularLinkedList cl){
     cl.head = NULL;
 }
 
+
 node *createNode(int x){
     node *p = new node;
     p->info = x;
