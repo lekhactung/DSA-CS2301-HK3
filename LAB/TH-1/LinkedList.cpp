@@ -97,20 +97,33 @@ void docfiledssv(node *&head,string tenFile) {
 	}
 }
 
-bool search(node *head, int key) {
+node* search(node *head, int key) {
 	node *p = head;
 	if (head == NULL) {
-		return false;
+		return NULL;
 	}
 	while (p != NULL && p->sv.MSSV != key) {
 		p = p->next;
 	}
 	if (p == NULL) {
-		return false;
+		return NULL;
 	}
-	return true;
+	return p;
 }
 
+node* search(node *head, string key) {
+	node *p = head;
+	if (head == NULL) {
+		return NULL;
+	}
+	while (p != NULL && p->sv.hoten != key && p->sv.quequan != key) {
+		p = p->next;
+	}
+	if (p == NULL) {
+		return NULL;
+	}
+	return p;
+}
 void output(node *head) {
 	while (head != NULL) {
 		xuat1sv(head->sv);
@@ -129,10 +142,15 @@ int main() {
 	// 	cout << "Tiep tuc : 1 /// Dung lai : 0 \n ::";
 	// 	cin >> chon;
 	// }
-	// if (search(head, 5)) {
-	// 	cout << "CO" << endl;
-	// }
 	docfiledssv(head,"SinhVien.txt");
-	output(head);
+	// output(head);
+	// cout << "======tim kiem======= \n";
+	
+	node *tmp = search(head,"Pham Thi Dao");
+	if(tmp!=NULL){
+		xuat1sv(tmp->sv);
+	} else {
+		cout << "no";
+	}
 	return 0;
 }
