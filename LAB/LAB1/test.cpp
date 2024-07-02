@@ -1,59 +1,31 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 
-struct node {
-    int info;
-    node *next;
-};
+int prime[10000001]; // N = 10^7
 
-struct circlelinkedlist{
-    node *head;
-    node *tail;
-};
-
-void init(circlelinkedlist &cl){
-    cl.head = NULL;
-    cl.tail = NULL;
+void sang(){
+        //Bước 1 : Coi tất cả các số từ 0 tới N là số nguyên tố
+	for(int i = 0; i <= 10000000; i++){
+		prime[i] = 1;
+	}
+        //Bước 2 : Sàng
+	prime[0] = prime[1] = 0;
+	for(int i = 2; i <= sqrt(10000000); i++){
+		if(prime[i]){
+			for(int j = i * i; j <= 10000000; j += i){
+				prime[j] = 0;
+			}
+		}
+	}
 }
 
-node *createNode (int x){
-    node *p = new node;
-    p->info = x;
-    p->next = NULL;
-    return p;
-}
-
-void addFirst (circlelinkedlist &cl, int x){
-    node *p = createNode(x);
-    if(cl.head==NULL){
-        cl.head = cl.tail = p;
-        cl.tail->next = cl.head;
-    }
-    else {
-        p->next = cl.head;
-        cl.head = p;
-        cl.tail->next = cl.head;    
-    }
-}
-
-
-void output(circlelinkedlist cl){
-    if(cl.head!=NULL){
-        node *p = cl.head;
-        do{
-            cout << p->info << " ";
-            p = p->next;
-        } while(p!=cl.head);
-    }
-}
 int main(){
-    circlelinkedlist cl;
-    init(cl);
-    addFirst(cl,10);
-    addFirst(cl,20);
-    addFirst(cl,30);
-    addFirst(cl,40);
-    addFirst(cl,50);
-    output(cl);
-    return 1;
+	sang();
+	for(int i = 0; i <= 30; i++){
+		if(prime[i]){
+			cout << i << " ";
+		}
+	}
+	return 0;
 }
