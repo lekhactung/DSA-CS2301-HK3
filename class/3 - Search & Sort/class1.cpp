@@ -28,10 +28,10 @@ int binarySearch(int a[],int n,int key){
             return mid;
         } 
         if(a[mid]>key){
-            l = mid;
+            r = mid-1;
         } 
         else {
-            r = mid;
+            l = mid+1;
         }
     }
 
@@ -58,9 +58,10 @@ void output(int a[],int n){
 int main(){
     int a[]={9,4,5,2,3,6};
     int n = sizeof(a) / sizeof(a[0]);
-    int index=sequentialSearch(a,n,10);
+    int index=sequentialSearch(a,n,3);
+    // cout << index;
     if(index!=-1){
-        cout << a[index];
+        cout << a[index]; 
     } else{
         cout << "Khong tim thay!";
     }
