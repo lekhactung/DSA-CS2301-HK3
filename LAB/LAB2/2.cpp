@@ -96,7 +96,7 @@ int main(){
     init(head);
     docfile(head);
     output(head);
-    selectionSort(&head);
+    // selectionSort(&head);
     output(head);
     destroyNode(head);
 
