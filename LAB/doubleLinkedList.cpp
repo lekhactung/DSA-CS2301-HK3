@@ -25,6 +25,26 @@ node *createNode(int x) {
 	return p;
 }
 
+node* findMax(doubleLinkedList dl) {
+	node *res = dl.head;
+	node *p = dl.head;
+	while (p != NULL) {
+		if (p->info > res->info)
+			res = p;
+		p = p->next;
+	}
+	return res;
+}
+node* findMin(doubleLinkedList dl) {
+	node *res = dl.head;
+	node *p = dl.head;
+	while (p != NULL) {
+		if (p->info < res->info)
+			res = p;
+		p = p->next;
+	}
+	return res;
+}
 
 node *search(doubleLinkedList dl, int key) {
 	if (dl.head != NULL) {
@@ -69,6 +89,7 @@ void insertLast(doubleLinkedList &dl, int x) {
 
 void insertAfter(doubleLinkedList &dl, int key, int x) {
 	node *tmp = search(dl, key);
+	cout << tmp->info;
 	if (tmp != NULL) {
 		if (tmp == dl.tail) {
 			insertLast(dl, x);
@@ -76,9 +97,9 @@ void insertAfter(doubleLinkedList &dl, int key, int x) {
 		else {
 			node *p = createNode(x);
 			p->next = tmp->next;
-			p->next->prev = p;
-			tmp->next = p;
+			tmp->next->prev = p;
 			p->prev = tmp;
+			tmp->next = p;
 
 		}
 	}
@@ -87,7 +108,32 @@ void insertAfter(doubleLinkedList &dl, int key, int x) {
 	}
 }
 
+void insertOrderedList(doubleLinkedList &dl, const int x) {
+	node *p = createNode(x);
+	if (dl.head == NULL) {
+		dl.head = dl.tail = p;
+		return;
+	}
 
+	if (p->info <= dl.head->info) {
+		insertFirst(dl, x);
+		return;
+	}
+	node *cur = dl.head;
+	while (cur->next != NULL&&cur->next->info < p->info)
+		cur = cur->next;
+
+	if (cur == dl.tail) {
+		insertLast(dl, x);
+		return;
+	}
+
+	p->next = cur->next;
+	cur->next->prev = p;
+
+	p->prev = cur;
+	cur->next = p;
+}
 
 
 void deleteNode(node *&p) {
@@ -184,14 +230,7 @@ int main() {
 
 	output(dl);
 	output2(dl);
-	cout << "====SORT==== \n";
-	cout << count(dl);
-	exit(0);
-
-	sortList(dl);
-	output(dl);
-	output2(dl);
-
+	cout << "====insert==== \n";	
 	insertAfter(dl, 1, 10);
 	output(dl);
 	output2(dl);
