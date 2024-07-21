@@ -58,6 +58,7 @@ void delNode(node *&root,int key){
     if(root!=NULL){
         node *p = root;
         node *parent = NULL;
+        //tim node can xoa
         while(p!=NULL && p->info !=key){
             parent = p;
             if(p->info > key){
@@ -67,7 +68,6 @@ void delNode(node *&root,int key){
             }
         }
         if(p!=NULL){
-            node *t;
             if(p->left !=NULL && p->right !=NULL){
                 parent = p;
                 node *r = p->right;
@@ -77,9 +77,11 @@ void delNode(node *&root,int key){
                 }
                 p->info = r->info;
                 p = r;
-            }else if(p->right==NULL){
+            }
+            node *t;
+            if(p->right==NULL){
                 t = p->left;
-            } else{
+            } else if(p->left==NULL){
                 t = p->right;
             }
 
@@ -140,7 +142,7 @@ int main(){
 
     LNR(root);
     cout << endl;
-    delNode(root,10);
+    delNode(root,40);
     LNR(root);
 
     // NLR(root);

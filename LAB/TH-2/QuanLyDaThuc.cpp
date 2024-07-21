@@ -22,35 +22,31 @@ node *createNode(term x) {
 }
 
 void insertOrderList(node *&head, term x) {
-	if (head == NULL) {
-		head = createNode(x);
-	}
-	else {
-		if (x.exp < head->info.exp) {
-			node *p = createNode(x);
-			p->next = head;
-			head = p;
-			return;
-		}
-		node *q = head;
+	if(head == NULL || x.exp < head->info.exp){
 		node *p = createNode(x);
-		while (q != NULL && q->next->info.exp < x.exp) {
-			q = q->next;
-		}
-		if (q->info.exp = x.exp) {
-			q->info.coef += x.coef;
-			return;
-		}
-		p->next = q->next;
-		q->next = p;
+		p->next = head;
+		head = p;
+		return;
 	}
+
+	node *q = head;
+	while(q->next!=NULL && q->next->info.exp<=x.exp){
+		q=q->next;
+	} 
+	if(q->info.exp == x.exp){
+		q->info.coef += x.coef;
+		return;
+	} 
+	node *p = createNode(x);
+	p->next = q->next;
+	q->next = p;
 
 }
 
 
 void output(node *head) {
 	while (head != NULL) {
-		cout << head->info.coef << "x^" << head->info.coef;
+		cout << head->info.coef << "x^" << head->info.exp;
 		if (head->next != NULL) {
 			cout << "+";
 		}
@@ -73,13 +69,13 @@ int main() {
 	t2.exp = 3;
 	insertOrderList(head, t2);
 	
-	/*t3.coef = 4;
+	t3.coef = 4;
 	t3.exp = 4;
 	insertOrderList(head, t3);
 
 	t4.coef = 5;
-	t4.exp = 5;
-	insertOrderList(head, t4);*/
+	t4.exp = 2;
+	insertOrderList(head, t4);
 
 	output(head);
 
