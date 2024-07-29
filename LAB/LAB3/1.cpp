@@ -26,7 +26,7 @@ void insertNode(node *&root, int x){
     } else if(x>root->info){
         insertNode(root->right,x);
     } else {
-        cout << "Gia tri da ton tai! \n";
+        cout << "Gia tri " << x <<" da ton tai! \n";
         return;
     }
 }
@@ -97,21 +97,31 @@ void NLR(node *root){
     }
 }
 
+int count(node *root){
+    if(root==NULL){
+        return 0;
+    } 
+    return 1+count(root->left)+count(root->right);
+}
 
 int main(){
     node *root;
     init(root);
-    insertNode(root,10);
     insertNode(root,20);
+    insertNode(root,10);
+    insertNode(root,12);
     insertNode(root,5);
     insertNode(root,2);
+    insertNode(root,25);
+    insertNode(root,19);
+    insertNode(root,12);
+    insertNode(root,15);
 
-    
     LNR(root);
     cout << endl;
     delNode(root,10);
     LNR(root);
-
-
+    cout << endl;
+    cout << count(root);
     return 1;
 }
