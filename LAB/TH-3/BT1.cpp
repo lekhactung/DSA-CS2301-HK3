@@ -1,12 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 #define MAX 50
 
 struct stack
 {
-	int a[MAX];
+	char a[MAX];
 	int top;
 };
 
@@ -14,7 +15,7 @@ void init(stack &s) {
 	s.top = -1;
 }
 
-void push(stack &s, const char* x) {
+void push(stack &s, char x) {
 	if (s.top < MAX) {
 		s.a[++s.top] = x;
 	}
@@ -24,7 +25,7 @@ bool isEmpty(stack s) {
 	return s.top == -1;
 }
 
-int pop(stack &s) {
+char pop(stack &s) {
 	if (!isEmpty(s)) {
 		return s.a[s.top--];
 	}
@@ -49,14 +50,14 @@ void init(queue &q) {
 	q.head == NULL;
 }
 
-node *createNode(char * x) {
+node *createNode(char *x) {
 	node *p = new node;
 	p->info = x;
 	p->next = NULL;
 	return p;
 }
 
-void enqueue(queue &q, char * x) {
+void enqueue(queue &q, char* x) {
 	if (q.head == NULL) {
 		q.head = createNode(x);
 	}
@@ -71,7 +72,7 @@ void enqueue(queue &q, char * x) {
 }
 
 char *dequeue(queue &q) {
-	char *data = "";
+	char *data = nullptr;
 	if (q.head != NULL) {
 		node *p = q.head;
 		data = p->info;
@@ -94,30 +95,29 @@ int priority(char x) {
 	return 0;
 }
 
-char *infixToPosfix(char str[]) {
+void infixToPosfix(char str[]) {
 	stack s;
 	init(s);
 	queue posfix;
 	init(posfix);
 
-	char *p = strtok(str, " ");
-	while (p) {
-		if (isdigit(*p)) {
-			enqueue(posfix, p);
-		}
-		else if (*p == '(') {
-			push(s, p);
-		}
-		else if (*p == ')') {
-			char *op = pop(s);
+	char *p = strtok(str," ");
+	while(p){
+		if(isdigit(*p)){
+			enqueue(posfix,p);
+		} else if(*p =='('){
+			push(s,*p);
+		} else if(*p==')'){
+			char op = pop(s);
 		}
 
 
+		p = strtok(NULL," ");
 	}
 }
 
 int main() {
 	char str[] = "2 + 4 - ( 5 - 3 ) / 2 + 3 - 1 * 5";
-
+	infixToPosfix(str);
 	return 1;
 }
