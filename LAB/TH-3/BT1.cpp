@@ -1,123 +1,154 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <string.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 #define MAX 50
 
-struct stack
+//Khai bao cau truc
+struct Stack
 {
-	char a[MAX];
+	char* a[MAX];
 	int top;
 };
 
-void init(stack &s) {
+//Khoi tao rong
+void init(Stack &s) {
 	s.top = -1;
 }
 
-void push(stack &s, char x) {
+//Cac thao tac
+void push(Stack &s, char* x) {
 	if (s.top < MAX) {
 		s.a[++s.top] = x;
 	}
 }
 
-bool isEmpty(stack s) {
+bool isEmpty(Stack s) {
 	return s.top == -1;
 }
 
-char pop(stack &s) {
+char* pop(Stack &s) {
 	if (!isEmpty(s)) {
 		return s.a[s.top--];
 	}
+	return "";
 }
 
-void printStack(stack s) {
-	for (int i = 0; i <= s.top; i++)
-		cout << s.a[i] << " ";
-	cout << endl;
+char* peek(Stack &s) {
+	if (!isEmpty(s)) {
+		return s.a[s.top];
+	}
+	return "";
 }
 
-struct node {
+//Queue
+struct Node
+{
 	char* info;
-	node *next;
+	Node *next;
 };
 
-struct queue {
-	node *head;
+struct Queue
+{
+	Node *head;
 };
 
-void init(queue &q) {
-	q.head == NULL;
+void init(Queue &q) {
+	q.head = NULL;
 }
 
-node *createNode(char *x) {
-	node *p = new node;
+Node* createNode(char* x) {
+	Node *p = new Node;
 	p->info = x;
 	p->next = NULL;
 	return p;
 }
 
-void enqueue(queue &q, char* x) {
+void enQueue(Queue &q, char* x) {
+	Node *p = createNode(x);//New Node
+
 	if (q.head == NULL) {
-		q.head = createNode(x);
+		q.head = p;
 	}
 	else {
-		node *plast = q.head;
-		while (plast->next != NULL) {
-			plast = plast->next;
+		Node *pLast = q.head;
+		while (pLast->next != NULL) {
+			pLast = pLast->next;
 		}
-		plast->next = createNode(x);
-		plast = plast->next;
+		pLast->next = p;
 	}
 }
 
-char *dequeue(queue &q) {
-	char *data = nullptr;
+char* deQueue(Queue &q) {
+	char *data = "";
+
 	if (q.head != NULL) {
-		node *p = q.head;
-		data = p->info;
+		Node *p = q.head;
 		q.head = q.head->next;
-		p->next == NULL;
+		data = p->info;
+		p->next = NULL;
 		delete p;
 	}
+
 	return data;
 }
 
-int priority(char x) {
-	switch (x)
-	{
-	case '+': case '-':
-		return 1;
-	case '*': case '/':
-		return 2;
+bool isEmpty(Queue q) {
+	return q.head == NULL;
+}
 
-	}
+int getPriority(string op) {
+	if (op == "/" || op == "*")
+		return 2;
+	if (op == "+" || op == "-")
+		return 1;
 	return 0;
 }
 
-void infixToPosfix(char str[]) {
-	stack s;
+void infixToPostfix(char str[]) {
+	Stack s;
 	init(s);
-	queue posfix;
-	init(posfix);
 
-	char *p = strtok(str," ");
-	while(p){
-		if(isdigit(*p)){
-			enqueue(posfix,p);
-		} else if(*p =='('){
-			push(s,*p);
-		} else if(*p==')'){
-			char op = pop(s);
+	Queue postfix;
+	init(postfix);
+
+	char *p = strtok(str, " ");
+	while (p != NULL) {
+		if (isdigit(*p))
+			enQueue(postfix, p);
+		else if (*p == '(') {
+			push(s, p);
+		}
+		else if (*p == ')') {
+			char*op = pop(s);
+			while (*op != '(') {
+				enQueue(postfix, op);
+				op = pop(s);
+			}
+		}
+		else {
+			while (!isEmpty(s)&&getPriority(p) <= getPriority(peek(s))) {
+				char *op = pop(s);
+				enQueue(postfix, op);
+			}
+			push(s, p);
 		}
 
+		p = strtok(NULL, " ");
+	}
 
-		p = strtok(NULL," ");
+	while (!isEmpty(s)) {
+		char* op = pop(s);
+		enQueue(postfix, op);
+	}
+
+	while (!isEmpty(postfix)) {
+		cout << deQueue(postfix) << " ";
 	}
 }
 
 int main() {
 	char str[] = "2 + 4 - ( 5 - 3 ) / 2 + 3 - 1 * 5";
-	infixToPosfix(str);
-	return 1;
+	infixToPostfix(str);
+	return 0;
 }
