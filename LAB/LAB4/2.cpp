@@ -57,7 +57,11 @@ int count (hashTable ht){
 }
 
 void delNode(hashTable &ht, int key){
-    
+    int k = search(ht,key);
+    if(k!=-1){
+        ht.h[k].info = -1;
+        ht.h[k].next = -1;
+    }
 }
 
 void printHashTable(hashTable ht){
@@ -82,6 +86,7 @@ int main(){
     insertNode(ht,63);
     insertNode(ht,70);
     printHashTable(ht);
-    cout << count(ht);
+    
+
     return 1;
 }
