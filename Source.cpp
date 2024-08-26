@@ -89,11 +89,11 @@ int main() {
 	insert(ht, 7);
 	insert(ht, 35);
 	insert(ht, 21);
-	cout << "////////////";
+	cout << "////////////" << endl;
 	printHash(ht);
 	del(ht, 35);
 	insert(ht, 13);
-	cout << "////////////";
+	cout << "////////////" << endl;
 	printHash(ht);
 	system("pause");
 	return 1;
