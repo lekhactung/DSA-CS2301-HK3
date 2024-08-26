@@ -25,7 +25,7 @@ void init(hashTable &ht) {
 		ht.h[i].value.id = -1;
 		ht.h[i].value.freq = 0;
 		ht.h[i].next = -1;
-		ht.h[i].value.userName = NULL;
+		ht.h[i].value.userName = nullptr;
 	}
 	ht.r = M - 1;
 }
@@ -38,7 +38,8 @@ void insert(hashTable &ht, user x) {
 	int k = hashFunc(x.id);
 	if (ht.h[k].value.id == -1) {
 		ht.h[k].value.id = x.id;
-		ht.h[k].value.freq++;
+		ht.h[k].value.userName = x.userName;
+		ht.h[k].value.freq = 1;
 	}
 	else {
 		if (ht.h[k].value.id == x.id) {
@@ -70,8 +71,7 @@ int main() {
 	hashTable ht;
 	init(ht);
 
-	ifstream ifs;
-	ifs.open("user");
+	ifstream ifs("user.txt");
 	if (ifs.is_open()) {
 		while (!ifs.eof()) {
 			user u;
@@ -83,7 +83,13 @@ int main() {
 		ifs.close();
 	}
 	
+	// user u1;
+	// u1.id = 1001;
+	// u1.userName = "lekhactung";
+	// insert(ht,u1);
 	printHash(ht);
+
+
 	system("pause");
 	return 1;
 }
