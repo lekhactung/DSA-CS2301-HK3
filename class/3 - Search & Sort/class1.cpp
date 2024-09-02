@@ -58,7 +58,7 @@ void output(int a[],int n){
 int main(){
     int a[]={9,4,5,2,3,6};
     int n = sizeof(a) / sizeof(a[0]);
-    int index=sequentialSearch(a,n,3);
+    int index=binarySearch(a,n,3);
     // cout << index;
     if(index!=-1){
         cout << a[index]; 
