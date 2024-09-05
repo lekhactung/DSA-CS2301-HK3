@@ -116,11 +116,17 @@ void delHV(node *&head, string lop){
     }
 }
 
+void swap(node *&a,node *&b){
+    SinhVien tmp = a->sv;
+    a->sv = b->sv;
+    b->sv = a->sv;
+}
+
+
 int main (){
     node *head;
     init(head);
     docFile(head,"sinhvien.txt");
-    // customizeOutput(head,"Le Thanh Long","ds23cs01");
     delHV(head,"ds23cs01");
     output(head);
     return 1;
