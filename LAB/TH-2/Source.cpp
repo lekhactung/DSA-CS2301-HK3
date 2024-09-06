@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <string.h>
 using namespace std;
 #define MAX 100
 
@@ -21,7 +22,7 @@ bool isFull(stack s) {
 }
 
 void push(stack &s, int x) {
-		s.a[++s.top] = x;
+	s.a[++s.top] = x;
 }
 
 int pop(stack &s) {
