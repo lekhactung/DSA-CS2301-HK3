@@ -136,7 +136,7 @@ void insertionSort(int a[],int n){
         int value = a[i];
         int pos = i-1;
         while(pos>=0 && a[pos]>value){
-            a[pos]=a[pos-1];
+            a[pos+1]=a[pos];
             pos--;
         }
         a[pos+1] = value;
