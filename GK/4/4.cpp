@@ -91,7 +91,7 @@ void delNode(node *&root,int key){
 
             if(parent->info > p->info){
                 parent->left = t;
-            } else if(parent->info < p->info){
+            } else{
                 parent->right = t;
             }
             delete p;
@@ -108,7 +108,8 @@ int main(){
     insert(root,12);
     insert(root,13);
     insert(root,28);
-    NLR(root);
+    // NLR(root);
+    LNR(root);
     delNode(root,10);
     cout << endl;
     LNR(root);

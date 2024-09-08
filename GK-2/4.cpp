@@ -46,37 +46,35 @@ void delNode(node *&root,int key){
     if(root!=NULL){
         node *p = root;
         node *parent = NULL;
-        while(p!=NULL && p->info != key){
+        while(p!=NULL && p->info !=key){
             parent = p;
             if(p->info > key){
                 p = p->left;
-            } else{
+            } else {
                 p = p->right;
             }
         }
-
         if(p!=NULL){
-            if(p->left != NULL && p->right !=NULL){
+            if(p->left!=NULL && p->right!=NULL){
                 parent = p;
-                node *r = p->right;
-                while(r->left!=NULL){
+                node *r = root->right;
+                while(r->left != NULL){
                     parent = r;
                     r = r->left;
                 }
-                p->info = r->info;
+                p->info = r->info ;
                 p = r;
             }
-
-            node *t ;
+            node *t;
             if(p->right == NULL){
                 t = p->left;
-            } else if(p->left==NULL){
+            } else if(p->left ==NULL){
                 t = p->right;
             }
 
-            if(parent->info > p->info){
+            if(parent->info > p->info ){
                 parent->left = t;
-            } else if(parent->info < p->info){
+            } else {
                 parent->right = t;
             }
             delete p;
