@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/CS02/3-CTDL&GT-1/EXC/GK/2",
-      "program": "d:/CS02/3-CTDL&GT-1/EXC/GK/2/build/Debug/outDebug",
+      "cwd": "d:/CS02/3-CTDL&GT-1/EXC/Temp",
+      "program": "d:/CS02/3-CTDL&GT-1/EXC/Temp/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
