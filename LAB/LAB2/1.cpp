@@ -114,8 +114,8 @@ int *merge(int *a ,int n,int *b,int m){
     while (j<m){
         c[cnt++] = b[j++];
     }
-    // cout << "c: " ;
-    // output(c,n+m);
+    cout << "c: " ;
+    output(c,n+m);
     return c; 
 }
 

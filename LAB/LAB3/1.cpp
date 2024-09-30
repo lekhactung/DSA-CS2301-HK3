@@ -107,21 +107,22 @@ int count(node *root){
 int main(){
     node *root;
     init(root);
-    insertNode(root,20);
-    insertNode(root,10);
-    insertNode(root,12);
-    insertNode(root,5);
-    insertNode(root,2);
-    insertNode(root,25);
-    insertNode(root,19);
-    insertNode(root,12);
+    insertNode(root,50);
+    insertNode(root,77);
+    insertNode(root,100);
+    insertNode(root,8);
+    insertNode(root,17);
+    insertNode(root,76);
+    insertNode(root,89);
     insertNode(root,15);
+    insertNode(root,3);
+    insertNode(root,20);
 
     LNR(root);
-    cout << endl;
-    delNode(root,10);
-    LNR(root);
-    cout << endl;
-    cout << count(root);
+    // cout << endl;
+    // delNode(root,10);
+    // LNR(root);
+    // cout << endl;
+    // cout << count(root);
     return 1;
 }

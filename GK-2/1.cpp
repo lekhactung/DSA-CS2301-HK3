@@ -38,6 +38,7 @@ void interchangeSort(int a[],int n){
                 swap(a[i],a[j]);
             }
         }
+        output(a,n);
     }
 }
 
@@ -56,7 +57,8 @@ void selectionSort(int a[],int n){
 }
 
 void insertionSort(int a[],int n){
-    for(int i=0;i<n;i++){
+    for(int i=1;i<n;i++){
+        cout << i << ": ";
         int value = a[i];
         int pos = i-1;
         while(pos>=0 && a[pos]>value){
@@ -64,6 +66,7 @@ void insertionSort(int a[],int n){
             pos--;
         }
         a[pos+1] = value;
+        output(a,n);
     }
 }
 
@@ -76,7 +79,12 @@ void bubbleSort(int a[],int n){
         }
     }
 }
-
+void output2(int a[],int l,int r){
+    for(int i=l;i<=r;i++){
+        cout << a[i] << " " ;
+    }
+    cout << endl;
+}
 void quickSort(int a[],int left, int right){
     int pivot = a[(left+right)/2];
     int l = left, r = right;
@@ -88,11 +96,13 @@ void quickSort(int a[],int left, int right){
             r--;
         }
         if(l<=r){
+        cout << "r : " << r << " | l : " << l << endl;
             swap(a[r],a[l]);
+            output(a,10);
             l++ ; r--;
         }
+        // output2(a,left,right);
     } while(l<=r);
-    
     if(l<right){
         quickSort(a,l,right);
     }
@@ -184,15 +194,17 @@ int *mergeSort(int a[],int n){
 
 
 int main(){
-    int a[MAX];
-    int n =10;
-    input(a,n);
-    output(a,n);
-
+    // int a[MAX];
+    int n = 10;
+    // input(a,n);
+    int a[n] = {42,18,35,1,20,25,29,9,13,15};
+    // output(a,n);
+    // insertionSort(a,n);
     // output(a,n);
     // heapSort(a,n);
-    int *b = mergeSort(a,n);
-    output(b,n);
-    delete []b;
+    // int *b = mergeSort(a,n);
+    // output(b,n);
+    // delete []b;
+    quickSort(a,0,n-1);
     return 1;
 }
